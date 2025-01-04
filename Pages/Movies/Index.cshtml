@@ -1,0 +1,47 @@
+﻿
+@page
+@using System.Security.Claims
+@model MovieReviewApp.Pages.Movies.IndexModel
+@{
+    ViewData["Title"] = "Lista Filmów";
+}
+
+<h1>Lista Filmów</h1>
+
+@if (Model.Movies.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Rok wydania</th>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <th>Akcje</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.Description</td>
+                    <td>@movie.ReleaseYear</td>
+                    @if (User.Identity.IsAuthenticated && movie.UserId == User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier))
+                    {
+                        <td>
+                            <a href="/Movies/Edit?id=@movie.Id" class="btn btn-primary">Edytuj</a>
+                            <a href="/Movies/Delete?id=@movie.Id" class="btn btn-danger">Usuń</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak filmów do wyświetlenia.</p>
+}

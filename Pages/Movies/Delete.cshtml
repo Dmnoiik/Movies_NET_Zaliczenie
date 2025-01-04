@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model MovieReviewApp.Pages.Movies.DeleteModel
+@{
+    ViewData["Title"] = "Usuń Film";
+}
+
+<h1>Usuń Film</h1>
+
+<div class="alert alert-danger" role="alert">
+    Czy na pewno chcesz usunąć ten film?
+</div>
+
+<div>
+    <h4>@Model.Movie.Title</h4>
+    <p>@Model.Movie.Description</p>
+    <p><strong>Rok wydania:</strong> @Model.Movie.ReleaseYear</p>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Usuń</button>
+    <a asp-page="/Movies/Index" class="btn btn-secondary">Anuluj</a>
+</form>

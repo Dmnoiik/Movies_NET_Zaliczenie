@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Movies_Zaliczenie.props" />
+</Project>
